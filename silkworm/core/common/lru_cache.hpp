@@ -48,15 +48,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace silkworm {
 
-#ifndef __wasm__
-#define SILKWORM_LRU_CACHE_GUARD          \
-    std::unique_lock<std::mutex> lock;    \
-    if (thread_safe_) {                   \
-        lock = std::unique_lock{access_}; \
-    }
-#else
+
 #define SILKWORM_LRU_CACHE_GUARD
-#endif
+// #endif
 
 template <typename key_t, typename value_t>
 class LruCache {
@@ -144,9 +138,6 @@ class LruCache {
     size_t max_size_;
     bool thread_safe_;
 
-#ifndef __wasm__
-    mutable std::mutex access_;
-#endif
 };
 
 }  // namespace silkworm

@@ -8,3 +8,7 @@ xcode
 .vs
 CMakeFiles
 cmake-build-*
+**conan2/
+**build/
+**deps/
+**third_party/

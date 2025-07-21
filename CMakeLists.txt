@@ -81,18 +81,18 @@ set(SILKWORM_MAIN_SRC_DIR "${SILKWORM_MAIN_DIR}/silkworm")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler_settings.cmake)
 
-if(NOT SILKWORM_CORE_ONLY)
-  # Silence CMake policy warnings in submodules
-  set(CMAKE_POLICY_DEFAULT_CMP0048 NEW) # project() command manages VERSION variables
-  set(CMAKE_POLICY_DEFAULT_CMP0063 NEW) # Honor visibility properties for all target types
+# if(NOT SILKWORM_CORE_ONLY)
+#   # Silence CMake policy warnings in submodules
+#   set(CMAKE_POLICY_DEFAULT_CMP0048 NEW) # project() command manages VERSION variables
+#   set(CMAKE_POLICY_DEFAULT_CMP0063 NEW) # Honor visibility properties for all target types
 
-  find_package(Boost REQUIRED COMPONENTS headers)
-  # Define Boost::headers target if missing because libtorrent needs it
-  if(NOT TARGET Boost::headers)
-    add_library(Boost::headers INTERFACE IMPORTED)
-    target_include_directories(Boost::headers INTERFACE ${Boost_INCLUDE_DIRS})
-  endif()
-endif()
+#   find_package(Boost REQUIRED COMPONENTS headers)
+#   # Define Boost::headers target if missing because libtorrent needs it
+#   if(NOT TARGET Boost::headers)
+#     add_library(Boost::headers INTERFACE IMPORTED)
+#     target_include_directories(Boost::headers INTERFACE ${Boost_INCLUDE_DIRS})
+#   endif()
+# endif()
 
 add_subdirectory(third_party)
 
@@ -108,8 +108,8 @@ endif()
 add_subdirectory(silkworm)
 
 if(NOT SILKWORM_HAS_PARENT)
-  add_subdirectory(cmd)
-  add_subdirectory(examples)
+  # add_subdirectory(cmd)
+  # add_subdirectory(examples)
 endif()
 
 # All unit tests target
