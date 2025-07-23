@@ -198,7 +198,7 @@ std::string human_size(uint64_t bytes, const char* unit) {
         }
     }
     static constexpr size_t kBufferSize{64};
-    SILKWORM_THREAD_LOCAL char output[kBufferSize];
+    char output[kBufferSize];
     SILKWORM_ASSERT(std::snprintf(output, kBufferSize, "%.02lf %s%s", value, suffix[index], unit) > 0);
     return output;
 }

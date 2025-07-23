@@ -77,3 +77,16 @@ if(SILKWORM_CORE_USE_ABSEIL)
   target_compile_definitions(evmone PRIVATE SILKWORM_CORE_USE_ABSEIL)
   target_link_libraries(evmone PRIVATE absl::flat_hash_map)
 endif()
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/evmone/include
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/evmone/test/state
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evmone/test
+  FILES_MATCHING PATTERN "*.hpp"
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/evmone/lib/
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+  FILES_MATCHING PATTERN "*.hpp"
+)

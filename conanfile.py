@@ -6,10 +6,10 @@ from conan import ConanFile
 
 class SilkwormRecipe(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
-    generators = 'CMakeDeps'
+    generators = 'CMakeDeps', 'PkgConfigDeps'
 
     def requirements(self):
-        self.requires('catch2/3.6.0')
+        # self.requires('catch2/3.6.0')
         self.requires('magic_enum/0.8.2')
         self.requires('ms-gsl/4.0.0')
         self.requires('nlohmann_json/3.11.3')
@@ -18,25 +18,24 @@ class SilkwormRecipe(ConanFile):
         if self.settings.arch == 'wasm':
             return
 
-        self.requires('abseil/20240116.2', override=True)
-        self.requires('benchmark/1.6.1')
+        # self.requires('benchmark/1.6.1')
         self.requires('boost/1.83.0', override=True)
         self.requires('cli11/2.2.0')
         # self.requires('gmp/6.2.1')
         # fix to an older recipe revision due to missing binary packages for the latest revision
         # see https://github.com/conan-io/conan-center-index/issues/26959
-        self.requires('grpc/1.67.1#c214ddb4e04e8d9a44d3a100defc9706')
-        self.requires('gtest/1.12.1')
-        self.requires('jwt-cpp/0.6.0')
-        self.requires('libtorrent/2.0.10')
-        self.requires('mimalloc/2.1.2')
-        self.requires('openssl/3.4.1', override=True)
+        # self.requires('grpc/1.67.1#c214ddb4e04e8d9a44d3a100defc9706')
+        # self.requires('gtest/1.12.1')
+        # self.requires('jwt-cpp/0.6.0')
+        # self.requires('libtorrent/2.0.10')
+        # self.requires('mimalloc/2.1.2')
+        # self.requires('openssl/3.4.1', override=True)
         self.requires('protobuf/5.27.0', override=True)
-        self.requires('roaring/1.1.2')
-        self.requires('snappy/1.1.7')
-        self.requires('spdlog/1.12.0')
-        self.requires('sqlitecpp/3.3.0')
-        self.requires('tomlplusplus/3.3.0')
+        # self.requires('roaring/1.1.2')
+        # self.requires('snappy/1.1.7')
+        # self.requires('spdlog/1.12.0')
+        # self.requires('sqlitecpp/3.3.0')
+        # self.requires('tomlplusplus/3.3.0')
         self.requires('libdeflate/1.23')
 
     def configure(self):
@@ -44,8 +43,8 @@ class SilkwormRecipe(ConanFile):
             self.options['grpc'].with_libsystemd = False
 
         # Disable Catch2 version 3.x.x signal handling on WASM
-        if self.settings.arch == 'wasm':
-            self.options['catch2'].no_posix_signals = True
+        # if self.settings.arch == 'wasm':
+            # self.options['catch2'].no_posix_signals = True
 
         self.configure_boost()
 

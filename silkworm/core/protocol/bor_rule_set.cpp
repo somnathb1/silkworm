@@ -140,7 +140,7 @@ namespace {
             return;
         }
         static constexpr evmc::address kFeeAddress{0x0000000000000000000000000000000000001010_address};
-        SILKWORM_THREAD_LOCAL Log log{
+        Log log{
             .address = kFeeAddress,
             .topics = {
                 {},

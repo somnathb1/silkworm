@@ -1,13 +1,13 @@
 # Copyright 2025 The Silkworm Authors
 # SPDX-License-Identifier: Apache-2.0
 
-find_package(absl REQUIRED)
+# find_package(absl REQUIRED)
 find_package(Boost REQUIRED COMPONENTS headers)
 find_package(CLI11 REQUIRED)
 find_package(tomlplusplus REQUIRED)
 
 add_executable(embed_toml "embed_toml.cpp")
-target_link_libraries(embed_toml PRIVATE silkworm_core absl::strings CLI11::CLI11 tomlplusplus::tomlplusplus)
+target_link_libraries(embed_toml PRIVATE silkworm_core CLI11::CLI11 tomlplusplus::tomlplusplus)
 
 add_executable(embed_json "embed_json.cpp")
 target_link_libraries(embed_json PRIVATE silkworm_core CLI11::CLI11 Boost::headers)

@@ -76,7 +76,7 @@ std::optional<Config> Config::from_json(const nlohmann::json& json) noexcept {
         return std::nullopt;
     }
 
-    SILKWORM_THREAD_LOCAL std::set<Bytes> codes;
+    std::set<Bytes> codes;
     if (json.contains("blockAlloc")) {
         std::vector<std::pair<BlockNum, SmallMap<evmc::address, std::string_view>>> out_vec;
         for (const auto& outer : json["blockAlloc"].items()) {

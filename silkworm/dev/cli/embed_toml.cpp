@@ -10,7 +10,7 @@
 #include <string_view>
 
 #include <CLI/CLI.hpp>
-#include <absl/strings/match.h>
+// #include <absl/strings/match.h>
 #include <toml.hpp>
 
 #include <silkworm/core/common/util.hpp>
@@ -67,9 +67,9 @@ int main(int argc, char* argv[]) {
             output << "inline constexpr std::array k" << snapshot_name << "Snapshots{\n";
             for (auto&& [key, value] : table) {
                 std::string key_str{key.begin(), key.end()};
-                if (!include_beacon && absl::StrContains(key_str, "beaconblocks")) {
+                // if (!include_beacon && absl::StrContains(key_str, "beaconblocks")) {
                     continue;
-                }
+                // }
                 std::string val_str{value.as_string()->get()};
                 output << "    Entry{\"" << key_str << "\"sv, \"" << val_str << "\"sv},\n";
             }

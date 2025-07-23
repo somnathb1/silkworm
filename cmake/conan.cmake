@@ -16,6 +16,8 @@ function(guess_conan_profile)
 
   if("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "")
     set(ARCH_NAME "")
+  # elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL riscv32)
+  #   set(ARCH_NAME riscv32)
   elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL x86_64)
     set(ARCH_NAME x64)
   elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL IA64)
@@ -79,10 +81,11 @@ if(NOT DEFINED CONAN_PROFILE)
   guess_conan_profile()
 endif()
 message(VERBOSE "CONAN_PROFILE: ${CONAN_PROFILE}")
-set(CONAN_PROFILE_PATH "${CMAKE_SOURCE_DIR}/cmake/profiles/${CONAN_PROFILE}")
-set(CONAN_HOST_PROFILE "${CONAN_PROFILE_PATH}")
-set(CONAN_BUILD_PROFILE "${CONAN_PROFILE_PATH}")
-get_conan_build_type("${CONAN_PROFILE_PATH}" CONAN_BUILD_TYPE)
+# set(CONAN_PROFILE_PATH "${CMAKE_SOURCE_DIR}/cmake/profiles/${CONAN_PROFILE}")
+set(CONAN_HOST_PROFILE "${CMAKE_SOURCE_DIR}/cmake/profiles/riscv32-baremetal")
+# set(CONAN_HOST_PROFILE "${CONAN_PROFILE_PATH}")
+set(CONAN_BUILD_PROFILE "${CMAKE_SOURCE_DIR}/cmake/profiles/linux_x64_gcc_11_release")
+# get_conan_build_type("${CONAN_PROFILE_PATH}" CONAN_BUILD_TYPE)
 
 set(CONAN_BUILD "missing")
 set(CONAN_SETTINGS "")
@@ -115,7 +118,6 @@ if(SILKWORM_SANITIZE_COMPILER_OPTIONS)
   # libraries that must be rebuilt with sanitizer flags
   # cmake-format: off
   set(CONAN_BUILD
-      "abseil/*"
       "boost/*"
       "grpc/*"
       "libtorrent/*"
@@ -149,9 +151,9 @@ if(SILKWORM_USE_MIMALLOC)
   endif()
 endif()
 
-if(SILKWORM_CORE_ONLY)
-  list(APPEND CONAN_CONF "catch2/*:tools.build:cxxflags=[\"-fno-exceptions\"]")
-endif()
+# if(SILKWORM_CORE_ONLY)
+#   list(APPEND CONAN_CONF "catch2/*:tools.build:cxxflags=[\"-fno-exceptions\"]")
+# endif()
 
 # cmake-format: off
 set(CONAN_INSTALL_ARGS

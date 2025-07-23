@@ -5,7 +5,7 @@ include("${SILKWORM_MAIN_DIR}/cmake/common/targets.cmake")
 
 add_subdirectory(stagedsync/stages)
 
-find_package(absl REQUIRED COMPONENTS strings)
+# find_package(absl REQUIRED COMPONENTS strings)
 find_package(Boost REQUIRED COMPONENTS headers)
 find_package(gRPC REQUIRED)
 find_package(GTest REQUIRED)
@@ -26,7 +26,7 @@ set(SILKWORM_NODE_PUBLIC_LIBS
 )
 
 set(SILKWORM_NODE_PRIVATE_LIBS
-    absl::strings
+    # absl::strings
     evmone
     magic_enum::magic_enum
     Microsoft.GSL::GSL

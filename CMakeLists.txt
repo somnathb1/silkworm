@@ -61,7 +61,7 @@ cable_add_buildinfo_library(
 
 option(SILKWORM_WASM_API "Build WebAssembly API" OFF)
 option(SILKWORM_CORE_ONLY "Only build Silkworm Core" OFF)
-option(SILKWORM_CORE_USE_ABSEIL "Allow use of Abseil in Silkworm Core" ON)
+option(SILKWORM_CORE_USE_ABSEIL "Allow use of Abseil in Silkworm Core" OFF)
 option(SILKWORM_CLANG_COVERAGE "Clang instrumentation for code coverage reports" OFF)
 option(SILKWORM_CLANG_TIDY "Clang-Tidy linter" OFF)
 option(SILKWORM_SANITIZE "Build instrumentation for sanitizers" OFF)
@@ -123,3 +123,18 @@ if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
 endif()
 message(VERBOSE "UNIT_TEST_TARGETS: ${UNIT_TEST_TARGETS}")
 add_custom_target(all_unit_tests DEPENDS ${UNIT_TEST_TARGETS})
+
+
+include(GNUInstallDirs)        # <── defines CMAKE_INSTALL_INCLUDEDIR, LIBDIR, BINDIR …
+
+install(
+    DIRECTORY
+    ${CMAKE_CURRENT_SOURCE_DIR}/silkworm/core
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/silkworm
+)
+
+install(
+    DIRECTORY
+    ${CMAKE_CURRENT_SOURCE_DIR}/silkworm/dev
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/silkworm
+)

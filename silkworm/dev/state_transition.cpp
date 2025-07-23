@@ -20,7 +20,7 @@
 #include <silkworm/core/state/in_memory_state.hpp>
 #include <silkworm/core/types/address.hpp>
 #include <silkworm/core/types/evmc_bytes32.hpp>
-#include <silkworm/sentry/common/ecc_key_pair.hpp>
+#include <silkworm/dev/common/ecc_key_pair.hpp>
 
 #include "expected_state.hpp"
 

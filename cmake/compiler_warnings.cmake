@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 if(MSVC)
-  add_compile_options(/wd4127) # Silence warnings about "conditional expression is constant" (abseil mainly)
   add_compile_options(/wd5030) # Silence warnings about GNU attributes
   add_compile_options(/wd4324) # Silence warning C4324: 'xxx': structure was padded due to alignment specifier
   add_compile_options(/wd4068) # Silence warning C4068: unknown pragma

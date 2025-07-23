@@ -146,11 +146,8 @@ class EVM {
     EvmTracers tracers_;
 
     // evmone is defined as static since it's stateless and doesn't have to be recreated every time EVM class is created
-#ifdef __wasm__
     static evmc::VM evm1_;  // we cannot use SILKWORM_THREAD_LOCAL i.e. static in WASM (duplicate-decl-specifier)
-#else
-    SILKWORM_THREAD_LOCAL static evmc::VM evm1_;  // since evmone is not thread safe it should be unique per thread
-#endif  // __wasm__
+
 };
 
 class EvmHost : public evmc::Host {

@@ -15,11 +15,11 @@
 
 #include <silkworm/core/common/assert.hpp>
 
-#if defined(__wasm__)
-#define SILKWORM_THREAD_LOCAL static
-#else
-#define SILKWORM_THREAD_LOCAL thread_local
-#endif
+// #if defined(__wasm__)
+// #define SILKWORM_THREAD_LOCAL static
+// #else
+// #define SILKWORM_THREAD_LOCAL thread_local
+// #endif
 
 namespace silkworm {
 
