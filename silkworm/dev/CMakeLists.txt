@@ -3,20 +3,22 @@
 
 include("${SILKWORM_MAIN_DIR}/cmake/common/targets.cmake")
 
-find_package(absl REQUIRED)
+# find_package(absl REQUIRED)
 find_package(CLI11 REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
-set(LIBS_PUBLIC "")
+# set(LIBS_PUBLIC "")
+set(LIBS_PRIVATE 
+)
 
 # cmake-format: off
-set(LIBS_PRIVATE
+set(LIBS_PUBLIC
     CLI11::CLI11
-    absl::time
+    # absl::time
     ethash::keccak
     nlohmann_json::nlohmann_json
     silkworm_core
-    silkworm_sentry
+    # silkworm_sentry
 )
 # cmake-format: on
 

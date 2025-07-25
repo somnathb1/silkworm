@@ -108,8 +108,8 @@ endif()
 add_subdirectory(silkworm)
 
 if(NOT SILKWORM_HAS_PARENT)
-  add_subdirectory(cmd)
-  add_subdirectory(examples)
+  # add_subdirectory(cmd)
+  # add_subdirectory(examples)
 endif()
 
 # All unit tests target

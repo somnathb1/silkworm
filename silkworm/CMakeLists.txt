@@ -1,10 +1,13 @@
 # Copyright 2025 The Silkworm Authors
 # SPDX-License-Identifier: Apache-2.0
 
+# project(silkworm LANGUAGES CXX)
+
+
 # Silkworm itself
 add_subdirectory(core)
 
-if(NOT SILKWORM_CORE_ONLY)
+# if(NOT SILKWORM_CORE_ONLY)
   add_subdirectory(interfaces)
   add_subdirectory(infra)
   add_subdirectory(db)
@@ -15,7 +18,7 @@ if(NOT SILKWORM_CORE_ONLY)
   add_subdirectory(sync)
   add_subdirectory(node)
   add_subdirectory(capi)
-endif()
+# endif()
 
 if(SILKWORM_WASM_API)
   add_subdirectory(wasm)

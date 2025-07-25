@@ -31,7 +31,7 @@ class StateTransition {
 
   public:
     explicit StateTransition(const std::string& file_path) noexcept;
-    explicit StateTransition(const nlohmann::json& json, bool terminate_on_error, bool show_diagnostics) noexcept;
+    explicit StateTransition(const std::string& json_str, bool terminate_on_error, bool show_diagnostics) noexcept;
 
     std::string name();
     std::string get_env(const std::string& key);
@@ -44,6 +44,7 @@ class StateTransition {
     Transaction get_transaction(const ExpectedSubState& expected_sub_state);
     void validate_transition(const Receipt& receipt, const ExpectedState& expected_state, const ExpectedSubState& expected_sub_state, const InMemoryState& state);
     void run();
-};
+  };
+void sample_run(std::string json_str);
 
 }  // namespace silkworm::cmd::state_transition

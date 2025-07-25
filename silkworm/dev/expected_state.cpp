@@ -26,10 +26,11 @@ ChainConfig ExpectedState::get_config() const {
 std::vector<ExpectedSubState> ExpectedState::get_sub_states() {
     std::vector<ExpectedSubState> sub_states;
     unsigned i = 0;
+    // std::cout << "In get_sub_states" << state_data_ << "\n";
 
     for (auto& tx : state_data_) {
         ExpectedSubState sub_state;
-
+        // std::cout << "tx.dump()" << tx.dump() << "\n";
         sub_state.stateHash = to_bytes32(from_hex(tx["hash"].get<std::string>()).value_or(Bytes{}));
         sub_state.logsHash = to_bytes32(from_hex(tx["logs"].get<std::string>()).value_or(Bytes{}));
         sub_state.dataIndex = tx["indexes"]["data"].get<uint64_t>();
