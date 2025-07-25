@@ -35,10 +35,13 @@ StateTransition::StateTransition(const std::string& file_path) noexcept {
     test_data_ = test_object.value();
 }
 
-StateTransition::StateTransition(const nlohmann::json& json, const bool terminate_on_error, const bool show_diagnostics) noexcept
+StateTransition::StateTransition(const std::string& json_str1, const bool terminate_on_error, const bool show_diagnostics) noexcept
     : terminate_on_error_{terminate_on_error},
       show_diagnostics_{show_diagnostics} {
-    auto test_object = json.begin();
+
+    nlohmann::json base_json;
+    base_json = nlohmann::json::parse(json_str1);
+    auto test_object = base_json.begin();
     test_name_ = test_object.key();
     std::cout << test_name_ << ":" << std::endl;
     test_data_ = test_object.value();
@@ -58,11 +61,14 @@ bool StateTransition::contains_env(const std::string& key) {
 
 std::vector<ExpectedState> StateTransition::get_expected_states() {
     std::vector<ExpectedState> expected_states;
-
-    for (const auto& post_state : test_data_.at("post").items()) {
-        nlohmann::json data = post_state.value();
+    auto post_items = test_data_.at("post").items();
+    // std::cout << "get_expected_states:post_itmems" << post_items;
+    for (const auto& post_state : post_items) {
+        // std::cout << "get_expected_states: test_data_.at(\"post\").items(i)" << post_state << "\n";
+        auto data = post_state.value();
+        // std::cout << "get_expected_states:items(i).value().array:" << data;
         const std::string& key = post_state.key();
-        expected_states.emplace_back(data, key);
+        expected_states.emplace_back(data[0], key);
     }
 
     return expected_states;
@@ -147,6 +153,7 @@ std::unique_ptr<evmc::address> StateTransition::private_key_to_address(const std
 Transaction StateTransition::get_transaction(const ExpectedSubState& expected_sub_state) {
     Transaction txn;
     auto j_transaction = test_data_["transaction"];
+    // std::cout << "J_transaction" << j_transaction.dump();
 
     txn.nonce = std::stoull(j_transaction.at("nonce").get<std::string>(), nullptr, 16);
     txn.set_sender(*private_key_to_address(j_transaction["secretKey"]));
@@ -268,6 +275,7 @@ void StateTransition::run() {
     total_count_ = 0;
 
     for (auto& expected_state : get_expected_states()) {
+        // std::cout << "Expected State:" << expected_state.fork_name() << "\n";
         for (const auto& expected_sub_state : expected_state.get_sub_states()) {
             ++total_count_;
             auto config = expected_state.get_config();
@@ -286,9 +294,6 @@ void StateTransition::run() {
             auto pre_txn_validation = protocol::pre_validate_transaction(txn, rev, config.chain_id, block.header.base_fee_per_gas, block.header.blob_gas_price());
             auto txn_validation = protocol::validate_transaction(txn, processor.evm().state(), processor.available_gas());
 
-            // std::cout << "pre: " << std::endl;
-            // state->print_state_root_hash();
-
             if (pre_block_validation == ValidationResult::kOk &&
                 block_validation == ValidationResult::kOk &&
                 pre_txn_validation == ValidationResult::kOk &&
@@ -300,9 +305,6 @@ void StateTransition::run() {
                 receipt.success = false;
             }
 
-            // std::cout << "post: " << std::endl;
-            // state->print_state_root_hash();
-
             validate_transition(receipt, expected_state, expected_sub_state, state);
         }
     }
@@ -313,4 +315,10 @@ void StateTransition::run() {
                   << std::endl;
     }
 }
+
+void sample_run(std::string json_str){
+    auto state_transition = StateTransition(json_str, false, true);
+    state_transition.run();
+}
+
 }  // namespace silkworm::cmd::state_transition
