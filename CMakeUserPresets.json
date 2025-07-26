@@ -1,9 +1,0 @@
-{
-    "version": 4,
-    "vendor": {
-        "conan": {}
-    },
-    "include": [
-        "../target/elf-compilation/riscv32im-succinct-zkvm-elf/release/build/silk-rust-state_transition-5a8ac9689182d625/out/build/conan2/CMakePresets.json"
-    ]
-}

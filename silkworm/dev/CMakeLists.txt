@@ -9,7 +9,6 @@ find_package(nlohmann_json REQUIRED)
 
 # set(LIBS_PUBLIC "")
 set(LIBS_PRIVATE 
-silkworm_sentry
 )
 
 # cmake-format: off

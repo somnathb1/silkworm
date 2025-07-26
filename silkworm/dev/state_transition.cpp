@@ -43,7 +43,7 @@ StateTransition::StateTransition(const std::string& json_str1, const bool termin
     base_json = nlohmann::json::parse(json_str1);
     auto test_object = base_json.begin();
     test_name_ = test_object.key();
-    std::cout << test_name_ << ":" << std::endl;
+    // std::cout << test_name_ << ":" << std::endl;
     test_data_ = test_object.value();
 }
 
@@ -253,7 +253,7 @@ void StateTransition::print_diagnostic_message(const ExpectedState& expected_sta
 }
 
 void StateTransition::print_message(const ExpectedState& expected_state, const ExpectedSubState& expected_sub_state, const std::string& message) {
-    std::cout << "[" << test_name_ << ":" << expected_state.fork_name() << ":" << expected_sub_state.index << "] " << message << std::endl;
+    // std::cout << "[" << test_name_ << ":" << expected_state.fork_name() << ":" << expected_sub_state.index << "] " << message << std::endl;
 }
 
 /*
@@ -317,8 +317,8 @@ void StateTransition::run() {
 }
 
 void sample_run(std::string json_str){
-    auto state_transition = StateTransition(json_str, false, true);
-    state_transition.run();
+    // auto state_transition = StateTransition(json_str, false, true);
+    // state_transition.run();
 }
 
 }  // namespace silkworm::cmd::state_transition

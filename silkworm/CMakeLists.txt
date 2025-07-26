@@ -1,7 +1,7 @@
 # Copyright 2025 The Silkworm Authors
 # SPDX-License-Identifier: Apache-2.0
 
-project(silkworm LANGUAGES CXX)
+# project(silkworm LANGUAGES CXX)
 
 
 # Silkworm itself

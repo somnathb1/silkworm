@@ -3,7 +3,7 @@
 
 #include <filesystem>
 
-#include <CLI/CLI.hpp>
+// #include <CLI/CLI.hpp>
 
 #include "../state_transition.hpp"
 
@@ -17,21 +17,21 @@ std::string json_str = R"json(
 )json";
 
 int main(int argc, char* argv[]) {
-    CLI::App app{"Executes Ethereum State Transition tests"};
+    // CLI::App app{"Executes Ethereum State Transition tests"};
 
-    // std::string path = fs::current_path().append("state_transition_sample1.json");
-    // app.add_option("path", path, "Path to test file or directory")
-    // ->check(CLI::ExistingPath);
+    // // std::string path = fs::current_path().append("state_transition_sample1.json");
+    // // app.add_option("path", path, "Path to test file or directory")
+    // // ->check(CLI::ExistingPath);
 
-    // path =
+    // // path =
 
-    bool terminate_flag = false;
-    app.add_flag("-t,--terminateOnError", terminate_flag, "Terminate execution on failure");
+    // bool terminate_flag = false;
+    // app.add_flag("-t,--terminateOnError", terminate_flag, "Terminate execution on failure");
 
-    bool diagnostics_flag = true;
-    app.add_flag("-d,--diagnostics", diagnostics_flag, "Enable extended diagnostics output");
+    // bool diagnostics_flag = true;
+    // app.add_flag("-d,--diagnostics", diagnostics_flag, "Enable extended diagnostics output");
 
-    CLI11_PARSE(app, argc, argv)
+    // CLI11_PARSE(app, argc, argv)
 
     try {
         // execute_test(json_str, terminate_flag, diagnostics_flag);
@@ -47,8 +47,8 @@ int main(int argc, char* argv[]) {
     }
 }
 
-void execute_test(const std::string& json_str1, bool terminate_flag, bool diagnostics_flag) {
+// void execute_test(const std::string& json_str1, bool terminate_flag, bool diagnostics_flag) {
     
-    auto state_transition = StateTransition(json_str1, terminate_flag, diagnostics_flag);
-    state_transition.run();
-}
+//     auto state_transition = StateTransition(json_str1, terminate_flag, diagnostics_flag);
+//     state_transition.run();
+// }

@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkw
 
 # Special rule for the target package
 package: preinstall
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool..."
 	/usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
@@ -77,7 +77,7 @@ package/fast: package
 
 # Special rule for the target package_source
 package_source:
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
 	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/CPackSourceConfig.cmake
 .PHONY : package_source
 
@@ -87,7 +87,7 @@ package_source/fast: package_source
 
 # Special rule for the target edit_cache
 edit_cache:
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
 	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
@@ -97,7 +97,7 @@ edit_cache/fast: edit_cache
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
 	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
@@ -107,7 +107,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -116,37 +116,37 @@ list_install_components/fast: list_install_components
 
 # Special rule for the target install
 install: preinstall
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
-	@echo "Running external command ..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
@@ -178,6 +178,7 @@ preinstall/fast:
 
 # clear depends
 depend:
+	$(CMAKE_COMMAND) -P /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -206,6 +207,19 @@ silkworm-buildinfo: cmake_check_build_system
 silkworm-buildinfo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/silkworm-buildinfo.dir/build.make CMakeFiles/silkworm-buildinfo.dir/build
 .PHONY : silkworm-buildinfo/fast
+
+#=============================================================================
+# Target rules for targets named all_unit_tests
+
+# Build rule for target.
+all_unit_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all_unit_tests
+.PHONY : all_unit_tests
+
+# fast build rule for target.
+all_unit_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/all_unit_tests.dir/build.make CMakeFiles/all_unit_tests.dir/build
+.PHONY : all_unit_tests/fast
 
 #=============================================================================
 # Target rules for targets named blst
@@ -245,6 +259,19 @@ ethash: cmake_check_build_system
 ethash/fast:
 	$(MAKE) $(MAKESILENT) -f third_party/ethash/ethash/lib/ethash/CMakeFiles/ethash.dir/build.make third_party/ethash/ethash/lib/ethash/CMakeFiles/ethash.dir/build
 .PHONY : ethash/fast
+
+#=============================================================================
+# Target rules for targets named gmplib
+
+# Build rule for target.
+gmplib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gmplib
+.PHONY : gmplib
+
+# fast build rule for target.
+gmplib/fast:
+	$(MAKE) $(MAKESILENT) -f third_party/gmp/CMakeFiles/gmplib.dir/build.make third_party/gmp/CMakeFiles/gmplib.dir/build
+.PHONY : gmplib/fast
 
 #=============================================================================
 # Target rules for targets named ff
@@ -325,151 +352,30 @@ tooling/fast:
 .PHONY : tooling/fast
 
 #=============================================================================
-# Target rules for targets named cborcpp
+# Target rules for targets named silkworm_core
 
 # Build rule for target.
-cborcpp: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cborcpp
-.PHONY : cborcpp
+silkworm_core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 silkworm_core
+.PHONY : silkworm_core
 
 # fast build rule for target.
-cborcpp/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/cbor-cpp/cbor-cpp/CMakeFiles/cborcpp.dir/build.make third_party/cbor-cpp/cbor-cpp/CMakeFiles/cborcpp.dir/build
-.PHONY : cborcpp/fast
+silkworm_core/fast:
+	$(MAKE) $(MAKESILENT) -f silkworm/core/CMakeFiles/silkworm_core.dir/build.make silkworm/core/CMakeFiles/silkworm_core.dir/build
+.PHONY : silkworm_core/fast
 
 #=============================================================================
-# Target rules for targets named cpp_base64
+# Target rules for targets named silkworm_dev
 
 # Build rule for target.
-cpp_base64: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpp_base64
-.PHONY : cpp_base64
+silkworm_dev: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 silkworm_dev
+.PHONY : silkworm_dev
 
 # fast build rule for target.
-cpp_base64/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/cpp-base64/CMakeFiles/cpp_base64.dir/build.make third_party/cpp-base64/CMakeFiles/cpp_base64.dir/build
-.PHONY : cpp_base64/fast
-
-#=============================================================================
-# Target rules for targets named mdbx-static
-
-# Build rule for target.
-mdbx-static: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx-static
-.PHONY : mdbx-static
-
-# fast build rule for target.
-mdbx-static/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx-static.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx-static.dir/build
-.PHONY : mdbx-static/fast
-
-#=============================================================================
-# Target rules for targets named mdbx_chk
-
-# Build rule for target.
-mdbx_chk: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_chk
-.PHONY : mdbx_chk
-
-# fast build rule for target.
-mdbx_chk/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_chk.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_chk.dir/build
-.PHONY : mdbx_chk/fast
-
-# Manual pre-install relink rule for target.
-mdbx_chk/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_chk.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_chk.dir/preinstall
-.PHONY : mdbx_chk/preinstall
-
-#=============================================================================
-# Target rules for targets named mdbx_copy
-
-# Build rule for target.
-mdbx_copy: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_copy
-.PHONY : mdbx_copy
-
-# fast build rule for target.
-mdbx_copy/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_copy.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_copy.dir/build
-.PHONY : mdbx_copy/fast
-
-# Manual pre-install relink rule for target.
-mdbx_copy/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_copy.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_copy.dir/preinstall
-.PHONY : mdbx_copy/preinstall
-
-#=============================================================================
-# Target rules for targets named mdbx_stat
-
-# Build rule for target.
-mdbx_stat: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_stat
-.PHONY : mdbx_stat
-
-# fast build rule for target.
-mdbx_stat/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_stat.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_stat.dir/build
-.PHONY : mdbx_stat/fast
-
-# Manual pre-install relink rule for target.
-mdbx_stat/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_stat.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_stat.dir/preinstall
-.PHONY : mdbx_stat/preinstall
-
-#=============================================================================
-# Target rules for targets named mdbx_dump
-
-# Build rule for target.
-mdbx_dump: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_dump
-.PHONY : mdbx_dump
-
-# fast build rule for target.
-mdbx_dump/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_dump.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_dump.dir/build
-.PHONY : mdbx_dump/fast
-
-# Manual pre-install relink rule for target.
-mdbx_dump/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_dump.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_dump.dir/preinstall
-.PHONY : mdbx_dump/preinstall
-
-#=============================================================================
-# Target rules for targets named mdbx_load
-
-# Build rule for target.
-mdbx_load: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_load
-.PHONY : mdbx_load
-
-# fast build rule for target.
-mdbx_load/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_load.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_load.dir/build
-.PHONY : mdbx_load/fast
-
-# Manual pre-install relink rule for target.
-mdbx_load/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_load.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_load.dir/preinstall
-.PHONY : mdbx_load/preinstall
-
-#=============================================================================
-# Target rules for targets named mdbx_drop
-
-# Build rule for target.
-mdbx_drop: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mdbx_drop
-.PHONY : mdbx_drop
-
-# fast build rule for target.
-mdbx_drop/fast:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_drop.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_drop.dir/build
-.PHONY : mdbx_drop/fast
-
-# Manual pre-install relink rule for target.
-mdbx_drop/preinstall:
-	$(MAKE) $(MAKESILENT) -f third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_drop.dir/build.make third_party/erigon-mdbx-go/mdbx-go/mdbxdist/CMakeFiles/mdbx_drop.dir/preinstall
-.PHONY : mdbx_drop/preinstall
+silkworm_dev/fast:
+	$(MAKE) $(MAKESILENT) -f silkworm/dev/CMakeFiles/silkworm_dev.dir/build.make silkworm/dev/CMakeFiles/silkworm_dev.dir/build
+.PHONY : silkworm_dev/fast
 
 silkworm/buildinfo.o: silkworm/buildinfo.c.o
 .PHONY : silkworm/buildinfo.o
@@ -509,25 +415,20 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... rebuild_cache"
+	@echo "... all_unit_tests"
 	@echo "... blst"
+	@echo "... gmplib"
 	@echo "... silkworm-buildinfo-git"
-	@echo "... cborcpp"
-	@echo "... cpp_base64"
 	@echo "... ethash"
 	@echo "... evmone"
 	@echo "... ff"
 	@echo "... instructions"
 	@echo "... keccak"
 	@echo "... loader"
-	@echo "... mdbx-static"
-	@echo "... mdbx_chk"
-	@echo "... mdbx_copy"
-	@echo "... mdbx_drop"
-	@echo "... mdbx_dump"
-	@echo "... mdbx_load"
-	@echo "... mdbx_stat"
 	@echo "... secp256k1"
 	@echo "... silkworm-buildinfo"
+	@echo "... silkworm_core"
+	@echo "... silkworm_dev"
 	@echo "... tooling"
 	@echo "... silkworm/buildinfo.o"
 	@echo "... silkworm/buildinfo.i"
@@ -543,6 +444,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
+	$(CMAKE_COMMAND) -P /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

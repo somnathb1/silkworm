@@ -1,4 +1,4 @@
-# Install script for directory: /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm
+# Install script for directory: /home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,41 +44,17 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/third_party/cmake_install.cmake")
+  include("/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/core/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/cmake_install.cmake")
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/silkworm" TYPE DIRECTORY FILES "/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/core")
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/silkworm" TYPE DIRECTORY FILES "/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/dev")
+  include("/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/dev/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/install_local_manifest.txt"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
-endif()
-if(CMAKE_INSTALL_COMPONENT)
-  if(CMAKE_INSTALL_COMPONENT MATCHES "^[a-zA-Z0-9_.+-]+$")
-    set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
-  else()
-    string(MD5 CMAKE_INST_COMP_HASH "${CMAKE_INSTALL_COMPONENT}")
-    set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INST_COMP_HASH}.txt")
-    unset(CMAKE_INST_COMP_HASH)
-  endif()
-else()
-  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/som/Documents/code/cppsp1explorations/silk_st_sp1/silkworm/silkworm/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

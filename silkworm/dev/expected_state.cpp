@@ -16,7 +16,7 @@ namespace silkworm::cmd::state_transition {
 ChainConfig ExpectedState::get_config() const {
     const auto config_it{test::kNetworkConfig.find(fork_name_)};
     if (config_it == test::kNetworkConfig.end()) {
-        std::cout << "unknown network " << fork_name_ << std::endl;
+        // std::cout << "unknown network " << fork_name_ << std::endl;
         throw std::invalid_argument(fork_name_);
     }
     const ChainConfig& config{config_it->second};
